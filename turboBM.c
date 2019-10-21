@@ -15,6 +15,7 @@
 
 #define ASIZE   256
 #define XSIZE   100
+#define TAM 1000
 
 //#define MAX (x , y) (((x) > (y)) ? (x) : (y))
 //#define MIN (x , y) (((x) < (y)) ? (x) : (y))
@@ -24,7 +25,6 @@
 
 void TurboBoyerMooreSearch(char *x, int m,char *y,int n, int *output) {
     
-
     int p = 0;
     
     int bcShift, i, j, shift, u, v, turboShift,
@@ -125,57 +125,68 @@ void printOut(int *x){
    printf("\n");
 }
 
+void naoEncaixa(char *t, char *patt, int *output){
+    for (int i = 0; i < (TAM/2); i++){
+        if(output[i] == (strlen (t) - strlen (patt) - 1)){
+            printf("encaixa");
+            break;
+        }
+    }
+}
+
 int main(){
 // m = 8
 // n = 24
-    char input[] = "GCATCGCAGAGAGTATACAGTACG CAG";
-//    char *t = "GCATCGCAGAGAGTATACAGTACG";
-//    char *patt = "CAG";
-//    char delim[] = " ";
-    char *aux;
-    char *t, *patt;
+    //char input[2*TAM+1]; //"GCATCGCAGAGAGTATACAGTACG CAG";
+    int u;
+    scanf("%d", &u);
+    printf("aqui\n");
+    for (int i = 0; i < u; i++){
+        char input[2*TAM+1];
+        char *aux;
+        char *t, *patt;
     
-    int output[256] = {0};
-    //int m = (int) strlen(patt);
-    //int n = (int) strlen(t);
-    aux = strtok(input, " ");
-    if(aux){
-        t = aux;
-    }
-
-    aux = strtok(NULL, " ");
-    if(aux){
-        patt = aux;
+        int output[TAM/2] = {0};
+        
+        printf("aqui\n");
+        gets(input);
+        printf("aqui\n");
+        aux = strtok(input, " ");
+        if(aux){
+            t = aux;
+        }
+        printf("aqui2\n");
+        aux = strtok(NULL, " ");
+        if(aux){
+            patt = aux;
+            int k = 0;
+            while(patt[0] != '\0'){
+                printf("%s\n", &patt[k]);
+                k++;
+            }
+            
+        }
+        printf("aqui2\n");
+        int m = (int) strlen(patt);
+        int n = (int) strlen(t);
+    
+        /*if(strlen(t) < strlen(patt)){
+            printf("nao encaixa");
+        } 
+        else {
+            TurboBoyerMooreSearch(patt, m, t, n, output);
+            naoEncaixa(t, patt, output);
+        }*/
+        printf("aqui3\n");
+        printf("%s\t%s\n", t, patt);
     }
     
-    printf("%s\n", t);
-    printf("%s\n", patt);
-    //printOut(output);
-//    TurboBoyerMooreSearch(patt, m, t, n, output);
-    //printOut(output);
 
+    //printf("%s\n", t);
+    //printf("%s\n", patt);
+    //printOut(output);
+    
+    //printOut(output);
 
     return 0;
 }
-
-/*int main()
-{
-    char input[16] = "abc,d";
-    char *p;
-    char *t, *patt;
-    p = strtok(input, ",");
-
-    if(p)
-    {
-        printf("%s\n", p);
-        t = p;
-    }
-    p = strtok(NULL, ",");
-
-    if(p){
-        printf("%s\n", p);
-        patt = p;
-    }
-    printf("%s\t%s\n", t, patt);
-    return 0;
-}*/
