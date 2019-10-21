@@ -16,9 +16,8 @@
 #define ASIZE   256
 #define XSIZE   100
 #define TAM 1000
-
-//#define MAX (x , y) (((x) > (y)) ? (x) : (y))
-//#define MIN (x , y) (((x) < (y)) ? (x) : (y))
+#define TRUE 1
+#define FALSE 0
 
 #define MAX(x, y) (((x) > (y)) ? (x) : (y))
 #define MIN(x, y) (((x) < (y)) ? (x) : (y))
@@ -118,7 +117,7 @@ void preBmGsTURBO(char *x, int m, int bmGs[]) {
 }
 //@end
 void printOut(int *x){
-   //int i;
+   
    for (int i = 0; i < 256; i++){
       printf("%d  ", x[i]);
    }
@@ -126,12 +125,16 @@ void printOut(int *x){
 }
 
 void naoEncaixa(char *t, char *patt, int *output){
+    
+    int encaixa = FALSE;
     for (int i = 0; i < (TAM/2); i++){
-        if(output[i] == (strlen (t) - strlen (patt) - 1)){
-            printf("encaixa");
+        if(output[i] == (strlen (t) - strlen (patt))){
+            encaixa = TRUE;
             break;
         }
     }
+
+    encaixa == TRUE ? printf("encaixa\n") : printf("nao encaixa\n");
 }
 
 int main(){
@@ -139,46 +142,32 @@ int main(){
 // n = 24
     //char input[2*TAM+1]; //"GCATCGCAGAGAGTATACAGTACG CAG";
     int u;
+    char t[TAM+1], patt[TAM+2];
     scanf("%d", &u);
-    printf("aqui\n");
+    //printf("aqui\n");
+
     for (int i = 0; i < u; i++){
-        char input[2*TAM+1];
-        char *aux;
-        char *t, *patt;
+        //char input[2*TAM+1];
+        //char *aux;
+        //char *t, *patt;
     
-        int output[TAM/2] = {0};
+        int output[TAM/2] = {-1};
+        for(int k = 0; k < TAM/2; k++){
+            output[k] = -1;
+        }
         
-        printf("aqui\n");
-        gets(input);
-        printf("aqui\n");
-        aux = strtok(input, " ");
-        if(aux){
-            t = aux;
-        }
-        printf("aqui2\n");
-        aux = strtok(NULL, " ");
-        if(aux){
-            patt = aux;
-            int k = 0;
-            while(patt[0] != '\0'){
-                printf("%s\n", &patt[k]);
-                k++;
-            }
-            
-        }
-        printf("aqui2\n");
+        //printf("aqui\n");
+        scanf("%s %s",&t,&patt);
+        //printf("aqui\n");
+        
+        //printf("aqui2\n");*/
         int m = (int) strlen(patt);
         int n = (int) strlen(t);
     
-        /*if(strlen(t) < strlen(patt)){
-            printf("nao encaixa");
-        } 
-        else {
-            TurboBoyerMooreSearch(patt, m, t, n, output);
-            naoEncaixa(t, patt, output);
-        }*/
-        printf("aqui3\n");
-        printf("%s\t%s\n", t, patt);
+        TurboBoyerMooreSearch(patt, m, t, n, output);
+        naoEncaixa(t, patt, output);
+        //printf("aqui3\n");
+        //printf("%s\t%s\n", t, patt);
     }
     
 
